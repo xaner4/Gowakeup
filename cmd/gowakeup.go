@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 
-	wol "gitlab.com/xaner4/GoWakeUp/pkg"
+	"gitlab.com/xaner4/gowakeup/pkg/wol"
 )
 
 func CMD() {
@@ -19,7 +19,7 @@ func CMD() {
 		return
 	}
 
-	_, err = wol.SendMagicPacket(mp, *ip, *port)
+	err = wol.SendMagicPacket(mp, *ip, *port)
 	if err != nil {
 		fmt.Println(err)
 	} else {

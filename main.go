@@ -1,7 +1,7 @@
 package main
 
 import (
-	gowakeup "gitlab.com/xaner4/GoWakeUp/cmd"
+	gowakeup "gitlab.com/xaner4/gowakeup/cmd"
 )
 
 func main() {
