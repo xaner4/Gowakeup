@@ -1,29 +1,24 @@
-package gowakeup
+package cmd
 
 import (
-	"flag"
-	"fmt"
-
-	"gitlab.com/xaner4/gowakeup/pkg/wol"
+	"github.com/spf13/cobra"
 )
 
-func CMD() {
-	MACAddress := flag.String("mac", "", "MAC address")
-	ip := flag.String("ip", "255.255.255.255", "Destination IP address")
-	port := flag.Int("port", 9, "Destination port")
-	flag.Parse()
+// Execute the Cobra CLI
+func Execute() {
 
-	mp, err := wol.CreateMagicPacket(*MACAddress)
-	if err != nil {
-		fmt.Println(err)
-		return
+	var cmdWake = &cobra.Command{
+		Use:   "wake [MAC/Alias address to device]",
+		Short: "Sends a magick packet to the MAC address provided",
+		Long: `print is for printing anything back to the screen.
+	For many years people have printed back to the screen.`,
+		Args: cobra.MinimumNArgs(1),
+		Run: func(cmd *cobra.Command, args []string) {
+
+		},
 	}
 
-	err = wol.SendMagicPacket(mp, *ip, *port)
-	if err != nil {
-		fmt.Println(err)
-	} else {
-		fmt.Printf("Magic packet sent successfully to %q on port %d\n", *ip, *port)
-
-	}
+	var rootCmd = &cobra.Command{Use: "app"}
+	rootCmd.AddCommand(cmdWake)
+	rootCmd.Execute()
 }
